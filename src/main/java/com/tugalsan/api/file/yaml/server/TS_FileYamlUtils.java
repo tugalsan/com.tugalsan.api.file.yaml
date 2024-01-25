@@ -1,6 +1,5 @@
 package com.tugalsan.api.file.yaml.server;
 
-import com.tugalsan.api.log.server.TS_Log;
 import java.util.List;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
@@ -8,8 +7,7 @@ import org.yaml.snakeyaml.constructor.Constructor;
 
 public class TS_FileYamlUtils {
 
-    final private static TS_Log d = TS_Log.of(TS_FileYamlUtils.class);
-
+//    final private static TS_Log d = TS_Log.of(TS_FileYamlUtils.class);
     public static Yaml getDriverInstance() {
         return new Yaml();
     }
@@ -40,10 +38,10 @@ public class TS_FileYamlUtils {
                zip: 345657
             """);
     }
-    
+
     public static Iterable<Customer> testCustomerAll() {
-        var yaml = new Yaml(new Construc    tor(Customer.class));
-.loadAll("""
+        var yaml = new Yaml(new Constructor(Customer.class));
+        yaml.loadAll("""
             !!com.baeldung.snakeyaml.Customer
             firstName: "John"
             lastName: "Doe"
@@ -61,7 +59,7 @@ public class TS_FileYamlUtils {
             """);
     }
 
-    public class Customer {
+    public static class Customer {
 
         private String firstName;
         private String lastName;
