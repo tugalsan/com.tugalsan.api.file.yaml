@@ -1,9 +1,7 @@
 package com.tugalsan.api.file.yaml.server;
 
-import java.util.List;
-import java.util.Map;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
+import module org.yaml.snakeyaml;
+import java.util.*;
 
 public class TS_FileYamlUtils {
 
