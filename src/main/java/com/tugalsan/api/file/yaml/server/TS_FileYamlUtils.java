@@ -1,7 +1,9 @@
 package com.tugalsan.api.file.yaml.server;
 
+import module com.tugalsan.api.stream;
 import module org.yaml.snakeyaml;
 import java.util.*;
+import java.util.stream.*;
 
 public class TS_FileYamlUtils {
 
@@ -20,7 +22,7 @@ public class TS_FileYamlUtils {
 
     public static Customer testCustomer() {
         return new Yaml().load("""
-            !!com.baeldung.snakeyaml.Customer
+            !!com.tugalsan.api.file.yaml.server.TS_FileYamlUtils.Customer
             firstName: "John"
             lastName: "Doe"
             age: 31
@@ -37,10 +39,10 @@ public class TS_FileYamlUtils {
             """);
     }
 
-    public static Iterable<Customer> testCustomerAll() {
-        var yaml = new Yaml(new Constructor(Customer.class));
-        yaml.loadAll("""
-            !!com.baeldung.snakeyaml.Customer
+    public static Stream<Customer> testCustomerAll() {
+        var yaml = new Yaml(new Constructor(Customer.class, new LoaderOptions()));
+        var it = yaml.loadAll("""
+            !!com.tugalsan.api.file.yaml.server.TS_FileYamlUtils.Customer
             firstName: "John"
             lastName: "Doe"
             age: 31
@@ -55,6 +57,7 @@ public class TS_FileYamlUtils {
                state: "State Y"
                zip: 345657
             """);
+        return TGS_StreamUtils.of(it).filter(e -> e instanceof Customer).map(e -> (Customer) e);
     }
 
     public static class Customer {
