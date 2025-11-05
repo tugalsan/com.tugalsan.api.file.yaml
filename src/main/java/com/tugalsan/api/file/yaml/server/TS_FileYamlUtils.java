@@ -4,8 +4,27 @@ import module com.tugalsan.api.stream;
 import module org.yaml.snakeyaml;
 import java.util.*;
 import java.util.stream.*;
+import java.io.*;
+import java.nio.file.*;
 
 public class TS_FileYamlUtils {
+
+    public static Optional<IOException> saveYamlToFile(Map<String, Object> src, Path dst) {
+        return saveYamlToFile((Object) src, dst);
+    }
+
+    public static Optional<IOException> saveYamlToFile(Object src, Path dst) {
+        try {
+            var options = new DumperOptions();
+            options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+            options.setPrettyFlow(true);
+            var yaml = new Yaml(options);
+            yaml.dump(src, new FileWriter(dst.toFile()));
+            return Optional.empty();
+        } catch (IOException e) {
+            return Optional.of(e);
+        }
+    }
 
 //    final private static TS_Log d = TS_Log.of(TS_FileYamlUtils.class);
     public static Yaml getDriverInstance() {
